@@ -1,5 +1,9 @@
 grammar ScriptPlugin;
 
+@header {
+package com.github.meshotron2.scriptPlugin;
+}
+
 main: module* expr* EOF;
 
 module: 'module' ID ('<'CHAR'>')? ('('NUM+')')? '{' expr '}';
