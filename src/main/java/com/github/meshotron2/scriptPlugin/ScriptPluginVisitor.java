@@ -29,11 +29,19 @@ public interface ScriptPluginVisitor<T> extends ParseTreeVisitor<T> {
     T visitModule(ScriptPluginParser.ModuleContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code Constructor}
+     * Visit a parse tree produced by the {@code CreateShape}
      * labeled alternative in {@link ScriptPluginParser#expr}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitConstructor(ScriptPluginParser.ConstructorContext ctx);
+    T visitCreateShape(ScriptPluginParser.CreateShapeContext ctx);
+
+    /**
+     * Visit a parse tree produced by {@link ScriptPluginParser#coefficient}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitCoefficient(ScriptPluginParser.CoefficientContext ctx);
 }

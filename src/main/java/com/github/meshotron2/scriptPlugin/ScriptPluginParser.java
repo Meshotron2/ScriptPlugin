@@ -22,14 +22,14 @@ public class ScriptPluginParser extends Parser {
     protected static final PredictionContextCache _sharedContextCache =
             new PredictionContextCache();
     public static final int
-            T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, ID = 8, CHAR = 9,
+            T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, T__7 = 8, ID = 9,
             NUM = 10, WS = 11;
     public static final int
-            RULE_main = 0, RULE_module = 1, RULE_expr = 2;
+            RULE_main = 0, RULE_module = 1, RULE_expr = 2, RULE_coefficient = 3;
 
     private static String[] makeRuleNames() {
         return new String[]{
-                "main", "module", "expr"
+                "main", "module", "expr", "coefficient"
         };
     }
 
@@ -37,7 +37,7 @@ public class ScriptPluginParser extends Parser {
 
     private static String[] makeLiteralNames() {
         return new String[]{
-                null, "'module'", "'<'", "'>'", "'('", "')'", "'{'", "'}'"
+                null, "'module'", "'<'", "'>'", "'('", "')'", "'{'", "'}'", "' '"
         };
     }
 
@@ -45,8 +45,7 @@ public class ScriptPluginParser extends Parser {
 
     private static String[] makeSymbolicNames() {
         return new String[]{
-                null, null, null, null, null, null, null, null, "ID", "CHAR", "NUM",
-                "WS"
+                null, null, null, null, null, null, null, null, null, "ID", "NUM", "WS"
         };
     }
 
@@ -165,35 +164,35 @@ public class ScriptPluginParser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                setState(9);
+                setState(11);
                 _errHandler.sync(this);
                 _la = _input.LA(1);
                 while (_la == T__0) {
                     {
                         {
-                            setState(6);
+                            setState(8);
                             module();
                         }
                     }
-                    setState(11);
+                    setState(13);
                     _errHandler.sync(this);
                     _la = _input.LA(1);
                 }
-                setState(15);
+                setState(17);
                 _errHandler.sync(this);
                 _la = _input.LA(1);
                 while (_la == ID) {
                     {
                         {
-                            setState(12);
+                            setState(14);
                             expr();
                         }
                     }
-                    setState(17);
+                    setState(19);
                     _errHandler.sync(this);
                     _la = _input.LA(1);
                 }
-                setState(18);
+                setState(20);
                 match(EOF);
             }
         } catch (RecognitionException re) {
@@ -207,24 +206,24 @@ public class ScriptPluginParser extends Parser {
     }
 
     public static class ModuleContext extends ParserRuleContext {
-        public TerminalNode ID() {
-            return getToken(ScriptPluginParser.ID, 0);
+        public List<TerminalNode> ID() {
+            return getTokens(ScriptPluginParser.ID);
         }
 
-        public ExprContext expr() {
-            return getRuleContext(ExprContext.class, 0);
+        public TerminalNode ID(int i) {
+            return getToken(ScriptPluginParser.ID, i);
         }
 
-        public TerminalNode CHAR() {
-            return getToken(ScriptPluginParser.CHAR, 0);
+        public CoefficientContext coefficient() {
+            return getRuleContext(CoefficientContext.class, 0);
         }
 
-        public List<TerminalNode> NUM() {
-            return getTokens(ScriptPluginParser.NUM);
+        public List<ExprContext> expr() {
+            return getRuleContexts(ExprContext.class);
         }
 
-        public TerminalNode NUM(int i) {
-            return getToken(ScriptPluginParser.NUM, i);
+        public ExprContext expr(int i) {
+            return getRuleContext(ExprContext.class, i);
         }
 
         public ModuleContext(ParserRuleContext parent, int invokingState) {
@@ -261,55 +260,69 @@ public class ScriptPluginParser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                setState(20);
+                setState(22);
                 match(T__0);
-                setState(21);
+                setState(23);
                 match(ID);
-                setState(25);
+                setState(28);
                 _errHandler.sync(this);
                 _la = _input.LA(1);
                 if (_la == T__1) {
                     {
-                        setState(22);
-                        match(T__1);
-                        setState(23);
-                        match(CHAR);
                         setState(24);
+                        match(T__1);
+                        setState(25);
+                        coefficient();
+                        setState(26);
                         match(T__2);
                     }
                 }
 
-                setState(34);
+                setState(38);
                 _errHandler.sync(this);
                 _la = _input.LA(1);
                 if (_la == T__3) {
                     {
-                        setState(27);
+                        setState(30);
                         match(T__3);
-                        setState(29);
+                        setState(31);
+                        match(ID);
+                        setState(33);
                         _errHandler.sync(this);
                         _la = _input.LA(1);
                         do {
                             {
                                 {
-                                    setState(28);
-                                    match(NUM);
+                                    setState(32);
+                                    match(ID);
                                 }
                             }
-                            setState(31);
+                            setState(35);
                             _errHandler.sync(this);
                             _la = _input.LA(1);
-                        } while (_la == NUM);
-                        setState(33);
+                        } while (_la == ID);
+                        setState(37);
                         match(T__4);
                     }
                 }
 
-                setState(36);
+                setState(40);
                 match(T__5);
-                setState(37);
-                expr();
-                setState(38);
+                setState(44);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                while (_la == ID) {
+                    {
+                        {
+                            setState(41);
+                            expr();
+                        }
+                    }
+                    setState(46);
+                    _errHandler.sync(this);
+                    _la = _input.LA(1);
+                }
+                setState(47);
                 match(T__6);
             }
         } catch (RecognitionException re) {
@@ -340,9 +353,13 @@ public class ScriptPluginParser extends Parser {
         }
     }
 
-    public static class ConstructorContext extends ExprContext {
+    public static class CreateShapeContext extends ExprContext {
         public TerminalNode ID() {
             return getToken(ScriptPluginParser.ID, 0);
+        }
+
+        public CoefficientContext coefficient() {
+            return getRuleContext(CoefficientContext.class, 0);
         }
 
         public List<TerminalNode> NUM() {
@@ -353,24 +370,24 @@ public class ScriptPluginParser extends Parser {
             return getToken(ScriptPluginParser.NUM, i);
         }
 
-        public ConstructorContext(ExprContext ctx) {
+        public CreateShapeContext(ExprContext ctx) {
             copyFrom(ctx);
         }
 
         @Override
         public void enterRule(ParseTreeListener listener) {
-            if (listener instanceof ScriptPluginListener) ((ScriptPluginListener) listener).enterConstructor(this);
+            if (listener instanceof ScriptPluginListener) ((ScriptPluginListener) listener).enterCreateShape(this);
         }
 
         @Override
         public void exitRule(ParseTreeListener listener) {
-            if (listener instanceof ScriptPluginListener) ((ScriptPluginListener) listener).exitConstructor(this);
+            if (listener instanceof ScriptPluginListener) ((ScriptPluginListener) listener).exitCreateShape(this);
         }
 
         @Override
         public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
             if (visitor instanceof ScriptPluginVisitor)
-                return ((ScriptPluginVisitor<? extends T>) visitor).visitConstructor(this);
+                return ((ScriptPluginVisitor<? extends T>) visitor).visitCreateShape(this);
             else return visitor.visitChildren(this);
         }
     }
@@ -380,33 +397,39 @@ public class ScriptPluginParser extends Parser {
         enterRule(_localctx, 4, RULE_expr);
         int _la;
         try {
-            _localctx = new ConstructorContext(_localctx);
+            _localctx = new CreateShapeContext(_localctx);
             enterOuterAlt(_localctx, 1);
             {
-                setState(40);
+                setState(49);
                 match(ID);
-                setState(48);
+                setState(50);
+                match(T__1);
+                setState(51);
+                coefficient();
+                setState(52);
+                match(T__2);
+                setState(60);
                 _errHandler.sync(this);
                 _la = _input.LA(1);
                 if (_la == T__3) {
                     {
-                        setState(41);
+                        setState(53);
                         match(T__3);
-                        setState(43);
+                        setState(55);
                         _errHandler.sync(this);
                         _la = _input.LA(1);
                         do {
                             {
                                 {
-                                    setState(42);
+                                    setState(54);
                                     match(NUM);
                                 }
                             }
-                            setState(45);
+                            setState(57);
                             _errHandler.sync(this);
                             _la = _input.LA(1);
                         } while (_la == NUM);
-                        setState(47);
+                        setState(59);
                         match(T__4);
                     }
                 }
@@ -422,22 +445,88 @@ public class ScriptPluginParser extends Parser {
         return _localctx;
     }
 
+    public static class CoefficientContext extends ParserRuleContext {
+        public TerminalNode ID() {
+            return getToken(ScriptPluginParser.ID, 0);
+        }
+
+        public TerminalNode NUM() {
+            return getToken(ScriptPluginParser.NUM, 0);
+        }
+
+        public CoefficientContext(ParserRuleContext parent, int invokingState) {
+            super(parent, invokingState);
+        }
+
+        @Override
+        public int getRuleIndex() {
+            return RULE_coefficient;
+        }
+
+        @Override
+        public void enterRule(ParseTreeListener listener) {
+            if (listener instanceof ScriptPluginListener) ((ScriptPluginListener) listener).enterCoefficient(this);
+        }
+
+        @Override
+        public void exitRule(ParseTreeListener listener) {
+            if (listener instanceof ScriptPluginListener) ((ScriptPluginListener) listener).exitCoefficient(this);
+        }
+
+        @Override
+        public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+            if (visitor instanceof ScriptPluginVisitor)
+                return ((ScriptPluginVisitor<? extends T>) visitor).visitCoefficient(this);
+            else return visitor.visitChildren(this);
+        }
+    }
+
+    public final CoefficientContext coefficient() throws RecognitionException {
+        CoefficientContext _localctx = new CoefficientContext(_ctx, getState());
+        enterRule(_localctx, 6, RULE_coefficient);
+        int _la;
+        try {
+            enterOuterAlt(_localctx, 1);
+            {
+                setState(62);
+                _la = _input.LA(1);
+                if (!((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__7) | (1L << ID) | (1L << NUM))) != 0))) {
+                    _errHandler.recoverInline(this);
+                } else {
+                    if (_input.LA(1) == Token.EOF) matchedEOF = true;
+                    _errHandler.reportMatch(this);
+                    consume();
+                }
+            }
+        } catch (RecognitionException re) {
+            _localctx.exception = re;
+            _errHandler.reportError(this, re);
+            _errHandler.recover(this, re);
+        } finally {
+            exitRule();
+        }
+        return _localctx;
+    }
+
     public static final String _serializedATN =
-            "\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\r\65\4\2\t\2\4\3" +
-                    "\t\3\4\4\t\4\3\2\7\2\n\n\2\f\2\16\2\r\13\2\3\2\7\2\20\n\2\f\2\16\2\23" +
-                    "\13\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\5\3\34\n\3\3\3\3\3\6\3 \n\3\r\3\16\3" +
-                    "!\3\3\5\3%\n\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\6\4.\n\4\r\4\16\4/\3\4\5\4" +
-                    "\63\n\4\3\4\2\2\5\2\4\6\2\2\28\2\13\3\2\2\2\4\26\3\2\2\2\6*\3\2\2\2\b" +
-                    "\n\5\4\3\2\t\b\3\2\2\2\n\r\3\2\2\2\13\t\3\2\2\2\13\f\3\2\2\2\f\21\3\2" +
-                    "\2\2\r\13\3\2\2\2\16\20\5\6\4\2\17\16\3\2\2\2\20\23\3\2\2\2\21\17\3\2" +
-                    "\2\2\21\22\3\2\2\2\22\24\3\2\2\2\23\21\3\2\2\2\24\25\7\2\2\3\25\3\3\2" +
-                    "\2\2\26\27\7\3\2\2\27\33\7\n\2\2\30\31\7\4\2\2\31\32\7\13\2\2\32\34\7" +
-                    "\5\2\2\33\30\3\2\2\2\33\34\3\2\2\2\34$\3\2\2\2\35\37\7\6\2\2\36 \7\f\2" +
-                    "\2\37\36\3\2\2\2 !\3\2\2\2!\37\3\2\2\2!\"\3\2\2\2\"#\3\2\2\2#%\7\7\2\2" +
-                    "$\35\3\2\2\2$%\3\2\2\2%&\3\2\2\2&\'\7\b\2\2\'(\5\6\4\2()\7\t\2\2)\5\3" +
-                    "\2\2\2*\62\7\n\2\2+-\7\6\2\2,.\7\f\2\2-,\3\2\2\2./\3\2\2\2/-\3\2\2\2/" +
-                    "\60\3\2\2\2\60\61\3\2\2\2\61\63\7\7\2\2\62+\3\2\2\2\62\63\3\2\2\2\63\7" +
-                    "\3\2\2\2\t\13\21\33!$/\62";
+            "\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\rC\4\2\t\2\4\3\t" +
+                    "\3\4\4\t\4\4\5\t\5\3\2\7\2\f\n\2\f\2\16\2\17\13\2\3\2\7\2\22\n\2\f\2\16" +
+                    "\2\25\13\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\5\3\37\n\3\3\3\3\3\3\3\6\3" +
+                    "$\n\3\r\3\16\3%\3\3\5\3)\n\3\3\3\3\3\7\3-\n\3\f\3\16\3\60\13\3\3\3\3\3" +
+                    "\3\4\3\4\3\4\3\4\3\4\3\4\6\4:\n\4\r\4\16\4;\3\4\5\4?\n\4\3\5\3\5\3\5\2" +
+                    "\2\6\2\4\6\b\2\3\3\2\n\f\2F\2\r\3\2\2\2\4\30\3\2\2\2\6\63\3\2\2\2\b@\3" +
+                    "\2\2\2\n\f\5\4\3\2\13\n\3\2\2\2\f\17\3\2\2\2\r\13\3\2\2\2\r\16\3\2\2\2" +
+                    "\16\23\3\2\2\2\17\r\3\2\2\2\20\22\5\6\4\2\21\20\3\2\2\2\22\25\3\2\2\2" +
+                    "\23\21\3\2\2\2\23\24\3\2\2\2\24\26\3\2\2\2\25\23\3\2\2\2\26\27\7\2\2\3" +
+                    "\27\3\3\2\2\2\30\31\7\3\2\2\31\36\7\13\2\2\32\33\7\4\2\2\33\34\5\b\5\2" +
+                    "\34\35\7\5\2\2\35\37\3\2\2\2\36\32\3\2\2\2\36\37\3\2\2\2\37(\3\2\2\2 " +
+                    "!\7\6\2\2!#\7\13\2\2\"$\7\13\2\2#\"\3\2\2\2$%\3\2\2\2%#\3\2\2\2%&\3\2" +
+                    "\2\2&\'\3\2\2\2\')\7\7\2\2( \3\2\2\2()\3\2\2\2)*\3\2\2\2*.\7\b\2\2+-\5" +
+                    "\6\4\2,+\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\61\3\2\2\2\60.\3\2\2" +
+                    "\2\61\62\7\t\2\2\62\5\3\2\2\2\63\64\7\13\2\2\64\65\7\4\2\2\65\66\5\b\5" +
+                    "\2\66>\7\5\2\2\679\7\6\2\28:\7\f\2\298\3\2\2\2:;\3\2\2\2;9\3\2\2\2;<\3" +
+                    "\2\2\2<=\3\2\2\2=?\7\7\2\2>\67\3\2\2\2>?\3\2\2\2?\7\3\2\2\2@A\t\2\2\2" +
+                    "A\t\3\2\2\2\n\r\23\36%(.;>";
     public static final ATN _ATN =
             new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 

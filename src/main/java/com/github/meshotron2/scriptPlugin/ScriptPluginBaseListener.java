@@ -55,7 +55,7 @@ public class ScriptPluginBaseListener implements ScriptPluginListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
-    public void enterConstructor(ScriptPluginParser.ConstructorContext ctx) {
+    public void enterCreateShape(ScriptPluginParser.CreateShapeContext ctx) {
     }
 
     /**
@@ -64,7 +64,25 @@ public class ScriptPluginBaseListener implements ScriptPluginListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
-    public void exitConstructor(ScriptPluginParser.ConstructorContext ctx) {
+    public void exitCreateShape(ScriptPluginParser.CreateShapeContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void enterCoefficient(ScriptPluginParser.CoefficientContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void exitCoefficient(ScriptPluginParser.CoefficientContext ctx) {
     }
 
     /**

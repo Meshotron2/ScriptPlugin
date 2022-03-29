@@ -38,18 +38,32 @@ public interface ScriptPluginListener extends ParseTreeListener {
     void exitModule(ScriptPluginParser.ModuleContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code Constructor}
+     * Enter a parse tree produced by the {@code CreateShape}
      * labeled alternative in {@link ScriptPluginParser#expr}.
      *
      * @param ctx the parse tree
      */
-    void enterConstructor(ScriptPluginParser.ConstructorContext ctx);
+    void enterCreateShape(ScriptPluginParser.CreateShapeContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code Constructor}
+     * Exit a parse tree produced by the {@code CreateShape}
      * labeled alternative in {@link ScriptPluginParser#expr}.
      *
      * @param ctx the parse tree
      */
-    void exitConstructor(ScriptPluginParser.ConstructorContext ctx);
+    void exitCreateShape(ScriptPluginParser.CreateShapeContext ctx);
+
+    /**
+     * Enter a parse tree produced by {@link ScriptPluginParser#coefficient}.
+     *
+     * @param ctx the parse tree
+     */
+    void enterCoefficient(ScriptPluginParser.CoefficientContext ctx);
+
+    /**
+     * Exit a parse tree produced by {@link ScriptPluginParser#coefficient}.
+     *
+     * @param ctx the parse tree
+     */
+    void exitCoefficient(ScriptPluginParser.CoefficientContext ctx);
 }

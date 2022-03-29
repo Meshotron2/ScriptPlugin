@@ -42,7 +42,18 @@ public class ScriptPluginBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitConstructor(ScriptPluginParser.ConstructorContext ctx) {
+    public T visitCreateShape(ScriptPluginParser.CreateShapeContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitCoefficient(ScriptPluginParser.CoefficientContext ctx) {
         return visitChildren(ctx);
     }
 }
