@@ -4,18 +4,20 @@ grammar ScriptPlugin;
 package com.github.meshotron2.scriptPlugin;
 }
 
-main: module* instantiation* EOF;
+main: module* main_mod EOF;
 
-module: 'module' ID ('('ID (ID )+')')? '{' expr* '}';
+main_mod: 'main' '('NUM',' NUM',' NUM',' NUM')' '{' instantiation* '}';
 
-expr: ID'<'coefficient'>'('('ID+')')?    #CreateShape
+module: 'module 'ID'('(ID',')* ID')' '{' expr* '}';
+
+expr: ID'<'coefficient'>''('(ID',')* ID')'    #CreateShape
     ;
 
-instantiation: ID'<'coefficient'>''('NUM+')';
+instantiation: ID'<'coefficient'>''('(NUM',')* NUM')';
 
-coefficient: ID|NUM|' ';
+coefficient: ID|NUM;
 
-ID: [a-zA-Z]+;
+ID: [a-zA-Z_]+;
 NUM: [0-9]+;
 
-WS: [ \t\r\n] -> skip;
+WS: [ \t\r\n]+ -> skip;

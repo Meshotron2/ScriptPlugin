@@ -30,7 +30,7 @@ public class ScriptPluginMain {
                     visitor0.visit(tree);
                 }
             }
-        } catch (IOException | RecognitionException e) {
+        } catch (IOException /*| RecognitionException*/ e) {
             e.printStackTrace();
             System.exit(1);
         }

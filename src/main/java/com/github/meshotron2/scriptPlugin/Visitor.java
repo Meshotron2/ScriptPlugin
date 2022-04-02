@@ -1,9 +1,5 @@
 package com.github.meshotron2.scriptPlugin;
 
-import com.github.meshotron2.scriptPlugin.shapes.Shape;
-import com.github.meshotron2.scriptPlugin.shapes.ShapeClass;
-import com.github.meshotron2.scriptPlugin.shapes.ShapeFactory;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,27 +23,42 @@ public class Visitor extends ScriptPluginBaseVisitor<Object> {
 
     @Override
     public Object visitMain(ScriptPluginParser.MainContext ctx) {
+
         final StringBuilder sb = new StringBuilder();
+
+        return visitChildren(ctx);
+    }
+
+    @Override
+    public Object visitMain_mod(ScriptPluginParser.Main_modContext ctx) {
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("{\"xg\": \"%s\", \"yg\": \"%s\", \"zg\": \"%s\", \"f\": \"%s\", \"file\": \"%s\"",
+                ctx.NUM(0).getText(), ctx.NUM(1).getText(), ctx.NUM(2).getText(),
+                ctx.NUM(3).getText(), fileName));
+
         ctx.instantiation().forEach(instantiationContext -> sb.append(visit(instantiationContext)));
-        System.out.println(sb);
+
+        sb.append('}');
+        return sb.toString();
     }
 
     @Override
     public Object visitModule(ScriptPluginParser.ModuleContext ctx) {
         final String name = ctx.ID(0).getText();
-        final char c = (char) visit(ctx.coefficient());
+//        final char c = (char) visit(ctx.coefficient());
 
-        if (!isCoefficientValid(c)) {
-            System.err.println("Coefficient for " + name + " is not valid");
-            return null;
-        }
+//        if (!isCoefficientValid(c)) {
+//            System.err.println("Coefficient for " + name + " is not valid");
+//            return null;
+//        }
 
-        final Shape s = new Shape(c);
+//        final Shape s = new Shape(c);
 
-        final int startIdx = Character.isDigit(c) ? 1 : 2;
-        ctx.ID().subList(startIdx, ctx.ID().size()).forEach(
-                k -> s.add(k.getText())
-        );
+//        final int startIdx = Character.isDigit(c) ? 1 : 2;
+//        ctx.ID().subList(startIdx, ctx.ID().size()).forEach(
+//                k -> s.add(k.getText())
+//        );
 
         final List<Shape> shapes = new ArrayList<>();
 

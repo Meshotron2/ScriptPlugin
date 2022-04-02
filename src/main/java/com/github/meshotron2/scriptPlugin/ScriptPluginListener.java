@@ -20,6 +20,16 @@ public interface ScriptPluginListener extends ParseTreeListener {
 	 */
 	void exitMain(ScriptPluginParser.MainContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ScriptPluginParser#main_mod}.
+	 * @param ctx the parse tree
+	 */
+	void enterMain_mod(ScriptPluginParser.Main_modContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ScriptPluginParser#main_mod}.
+	 * @param ctx the parse tree
+	 */
+	void exitMain_mod(ScriptPluginParser.Main_modContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ScriptPluginParser#module}.
 	 * @param ctx the parse tree
 	 */

@@ -19,6 +19,12 @@ public interface ScriptPluginVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMain(ScriptPluginParser.MainContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ScriptPluginParser#main_mod}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMain_mod(ScriptPluginParser.Main_modContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ScriptPluginParser#module}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

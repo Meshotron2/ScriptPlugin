@@ -30,6 +30,18 @@ public class ScriptPluginBaseListener implements ScriptPluginListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMain_mod(ScriptPluginParser.Main_modContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMain_mod(ScriptPluginParser.Main_modContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterModule(ScriptPluginParser.ModuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
