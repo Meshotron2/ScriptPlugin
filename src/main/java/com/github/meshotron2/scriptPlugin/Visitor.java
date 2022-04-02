@@ -8,11 +8,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Visitor extends ScriptPluginBaseVisitor<Object> {
 
     private final String fileName;
     private final Map<String, Shape> modules = new HashMap<>();
+
+    private static final AtomicInteger cnt = new AtomicInteger(0);
+
+    public static String getShapeName() {
+        return String.valueOf(cnt.getAndIncrement());
+    }
 
     public Visitor(String fileName) {
         this.fileName = fileName;
@@ -20,7 +27,9 @@ public class Visitor extends ScriptPluginBaseVisitor<Object> {
 
     @Override
     public Object visitMain(ScriptPluginParser.MainContext ctx) {
-        return visitChildren(ctx);
+        final StringBuilder sb = new StringBuilder();
+        ctx.instantiation().forEach(instantiationContext -> sb.append(visit(instantiationContext)));
+        System.out.println(sb);
     }
 
     @Override
@@ -81,14 +90,14 @@ public class Visitor extends ScriptPluginBaseVisitor<Object> {
         final Object[] array = ctx.NUM().stream()
                 .map(terminalNode -> Integer.parseInt(terminalNode.getText()))
                 .toArray();
-        final int[] params = new int[array.length];
+        final List<Integer> params = new ArrayList<>();
         for (int i = 1; i < array.length; i++)
-            params[i] = (int) array[i];
+            params.add((int) array[i]);
 
 //        s.initialize(params);
 //        s.draw(fileName);
 
-        return s;
+        return s.getJsonData(params, c);
     }
 
     private boolean isCoefficientValid(char c) {

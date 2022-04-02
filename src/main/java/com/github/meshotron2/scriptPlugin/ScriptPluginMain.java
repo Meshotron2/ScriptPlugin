@@ -1,6 +1,7 @@
 package com.github.meshotron2.scriptPlugin;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
@@ -24,13 +25,12 @@ public class ScriptPluginMain {
             if (parser.getNumberOfSyntaxErrors() == 0) {
                 // print LISP-style tree:
                 // System.out.println(tree.toStringTree(parser));
-                Visitor visitor0 = new Visitor(args[0]);
-                visitor0.visit(tree);
+                if (Objects.equals(args[2], "lm")) {
+                    Visitor visitor0 = new Visitor(args[3]);
+                    visitor0.visit(tree);
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        } catch (RecognitionException e) {
+        } catch (IOException | RecognitionException e) {
             e.printStackTrace();
             System.exit(1);
         }
