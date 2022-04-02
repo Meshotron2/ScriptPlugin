@@ -9,39 +9,38 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * by {@link ScriptPluginParser}.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
- *            operations with no return type.
+ * operations with no return type.
  */
 public interface ScriptPluginVisitor<T> extends ParseTreeVisitor<T> {
-    /**
-     * Visit a parse tree produced by {@link ScriptPluginParser#main}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitMain(ScriptPluginParser.MainContext ctx);
-
-    /**
-     * Visit a parse tree produced by {@link ScriptPluginParser#module}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitModule(ScriptPluginParser.ModuleContext ctx);
-
-    /**
-     * Visit a parse tree produced by the {@code CreateShape}
-     * labeled alternative in {@link ScriptPluginParser#expr}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitCreateShape(ScriptPluginParser.CreateShapeContext ctx);
-
-    /**
-     * Visit a parse tree produced by {@link ScriptPluginParser#coefficient}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitCoefficient(ScriptPluginParser.CoefficientContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ScriptPluginParser#main}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMain(ScriptPluginParser.MainContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ScriptPluginParser#module}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModule(ScriptPluginParser.ModuleContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CreateShape}
+	 * labeled alternative in {@link ScriptPluginParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateShape(ScriptPluginParser.CreateShapeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ScriptPluginParser#instantiation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInstantiation(ScriptPluginParser.InstantiationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ScriptPluginParser#coefficient}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCoefficient(ScriptPluginParser.CoefficientContext ctx);
 }

@@ -1,17 +1,18 @@
 package com.github.meshotron2.scriptPlugin.shapes;
 
-public class Sphere extends Shape {
-    public Sphere(char coefficient) {
-        super(coefficient);
-        super.add("x", "y", "z", "r");
+import java.util.List;
+
+public class Sphere extends ShapeClass {
+    public Sphere() {
+        super("Sphere", List.of("x", "y", "z", "r"));
     }
 
     @Override
-    public void draw(String file) {
-        final int xc = getProperties().get("x");
-        final int yc = getProperties().get("y");
-        final int zc = getProperties().get("z");
-        final int r = getProperties().get("r");
+    public void initialize(List<Integer> values, char coefficient) {
+        final int xc = values.get(0);
+        final int yc = values.get(1);
+        final int zc = values.get(2);
+        final int r = values.get(3);
 
         for (int i = xc - r; i <= xc + r; i++)
             for (int j = yc - r; j <= yc + r; j++)

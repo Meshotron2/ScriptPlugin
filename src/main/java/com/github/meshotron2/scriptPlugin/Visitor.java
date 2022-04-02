@@ -1,11 +1,18 @@
 package com.github.meshotron2.scriptPlugin;
 
 import com.github.meshotron2.scriptPlugin.shapes.Shape;
+import com.github.meshotron2.scriptPlugin.shapes.ShapeClass;
 import com.github.meshotron2.scriptPlugin.shapes.ShapeFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Visitor extends ScriptPluginBaseVisitor<Object> {
 
     private final String fileName;
+    private final Map<String, Shape> modules = new HashMap<>();
 
     public Visitor(String fileName) {
         this.fileName = fileName;
@@ -33,7 +40,9 @@ public class Visitor extends ScriptPluginBaseVisitor<Object> {
                 k -> s.add(k.getText())
         );
 
-        ctx.expr().forEach(this::visit);
+        final List<Shape> shapes = new ArrayList<>();
+
+        ctx.expr().forEach(node -> shapes.add((Shape) visit(node)));
 
         return visitChildren(ctx);
     }
@@ -41,15 +50,17 @@ public class Visitor extends ScriptPluginBaseVisitor<Object> {
     @Override
     public Object visitCreateShape(ScriptPluginParser.CreateShapeContext ctx) {
         final char c = (char) visit(ctx.coefficient());
-        final Shape s = ShapeFactory.fromName(ctx.ID().getText(), c);
+        final ShapeClass s = ShapeFactory.fromName(ctx.ID(0).getText(), new ArrayList<>());
 
-        final Object[] array = ctx.NUM().stream().map(terminalNode -> Integer.parseInt(terminalNode.getText())).toArray();
-        final int[] params = new int[array.length];
-        for (int i = 0; i < array.length; i++)
-            params[i] = (int) array[i];
+        final Object[] array = ctx.ID().stream()
+                .map(terminalNode -> Integer.parseInt(terminalNode.getText()))
+                .toArray();
+        final String[] params = new String[array.length];
+        for (int i = 1; i < array.length; i++)
+            params[i] = (String) array[i];
 
-        s.initialize(params);
-        s.draw(fileName);
+//        s.add(params);
+//        s.draw(fileName);
 
         return s;
     }
@@ -60,6 +71,24 @@ public class Visitor extends ScriptPluginBaseVisitor<Object> {
         if (!isCoefficientValid(c))
             return '\0';
         return c;
+    }
+
+    @Override
+    public Object visitInstantiation(ScriptPluginParser.InstantiationContext ctx) {
+        final char c = (char) visit(ctx.coefficient());
+        final ShapeClass s = ShapeFactory.fromName(ctx.ID().getText(), new ArrayList<>());
+
+        final Object[] array = ctx.NUM().stream()
+                .map(terminalNode -> Integer.parseInt(terminalNode.getText()))
+                .toArray();
+        final int[] params = new int[array.length];
+        for (int i = 1; i < array.length; i++)
+            params[i] = (int) array[i];
+
+//        s.initialize(params);
+//        s.draw(fileName);
+
+        return s;
     }
 
     private boolean isCoefficientValid(char c) {

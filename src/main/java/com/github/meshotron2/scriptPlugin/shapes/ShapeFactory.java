@@ -1,16 +1,16 @@
 package com.github.meshotron2.scriptPlugin.shapes;
 
+import java.util.List;
+
 public class ShapeFactory {
-    public static Shape fromName(String shapeName, char coefficient, String... params) {
+    public static ShapeClass fromName(String shapeName, List<String> params) {
         switch (shapeName) {
             case "Cuboid":
-                return new Cuboid(coefficient);
+                return new Cuboid();
             case "Sphere":
-                return new Sphere(coefficient);
+                return new Sphere();
             default:
-                final Shape shape = new Shape(coefficient);
-                shape.add(params);
-                return shape;
+                return new ShapeClass(shapeName, params);
         }
     }
 }

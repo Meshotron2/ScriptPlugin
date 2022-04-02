@@ -1,16 +1,19 @@
 package com.github.meshotron2.scriptPlugin.shapes;
 
-public class Cuboid extends Shape {
-    public Cuboid(char coefficient) {
-        super(coefficient);
-        super.add("x1", "x2", "y1", "y2", "z1", "z2");
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cuboid extends ShapeClass {
+
+    public Cuboid() {
+        super("Cuboid", List.of("x1", "x2", "y1", "y2", "z1", "z2"));
     }
 
     @Override
-    public void draw(String file) {
-        for (int x = getProperties().get("x1"); x < getProperties().get("x2"); x++)
-            for (int y = getProperties().get("y1"); y < getProperties().get("y2"); y++)
-                for (int z = getProperties().get("z1"); z < getProperties().get("z2"); z++)
+    public void initialize(List<Integer> values, char coefficient) {
+        for (int x = values.get(0); x < values.get(1); x++)
+            for (int y = values.get(2); y < values.get(3); y++)
+                for (int z = values.get(4); z < values.get(5); z++)
                     return; // todo
     }
 }
