@@ -1,4 +1,6 @@
-package com.github.meshotron2.scriptPlugin;
+package com.github.meshotron2.scriptPlugin.shape;
+
+import com.github.meshotron2.scriptPlugin.Visitor;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,0 +1,9 @@
+module PyramidOverCube(cube_x, cube_y, cube_z, cube_l) {
+  Cube<A>(cube_x, cube_y, cube_z, cube_l)
+  Sphere<B>(cube_x, cube_y, cube_z)
+}
+
+main(100, 100, 100, 8000) {
+  PyramidOverCube<A>(0, 0, 0, 1)
+  PyramidOverCube<B>(10, 10, 10, 5)
+}

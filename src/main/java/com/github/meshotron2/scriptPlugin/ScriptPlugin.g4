@@ -1,8 +1,8 @@
 grammar ScriptPlugin;
 
-@header {
-package com.github.meshotron2.scriptPlugin;
-}
+//@header {
+//package com.github.meshotron2.scriptPlugin;
+//}
 
 main: module* main_mod EOF;
 

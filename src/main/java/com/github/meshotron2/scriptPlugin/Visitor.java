@@ -1,5 +1,9 @@
 package com.github.meshotron2.scriptPlugin;
 
+import com.github.meshotron2.scriptPlugin.shape.Shape;
+import com.github.meshotron2.scriptPlugin.shape.ShapeClass;
+import com.github.meshotron2.scriptPlugin.shape.ShapeFactory;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +75,8 @@ public class Visitor extends ScriptPluginBaseVisitor<Object> {
     public Object visitCreateShape(ScriptPluginParser.CreateShapeContext ctx) {
         final char c = (char) visit(ctx.coefficient());
         final ShapeClass s = ShapeFactory.fromName(ctx.ID(0).getText(), new ArrayList<>());
+
+        ctx.ID().forEach(terminalNode -> System.out.println(terminalNode.getText()));
 
         final Object[] array = ctx.ID().stream()
                 .map(terminalNode -> Integer.parseInt(terminalNode.getText()))

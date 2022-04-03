@@ -15,18 +15,67 @@
     </properties>
 
     <build>
+        <sourceDirectory>
+            src/main/java/
+        </sourceDirectory>
+
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
+                <version>4.3</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.github.meshotron2.scriptPlugin.ScriptPluginMain</mainClass>
-                        </manifest>
-                    </archive>
+<!--                    <includes>-->
+<!--                        ${basedir}/src/main/antlr4/com/github/meshotron2/scriptPlugin/ScriptPlugin.g4-->
+<!--                    </includes>-->
+                    <sourceDirectory>${basedir}/src/main/java/</sourceDirectory>
+                    <listener>false</listener>
+                    <visitor>true</visitor>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>antlr4</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <Main-Class>com.github.meshotron2.scriptPlugin.ScriptPluginMain</Main-Class>
+                                    </manifestEntries>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jar-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <mainClass>com.github.meshotron2.scriptPlugin.ScriptPluginMain</mainClass>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
         </plugins>
     </build>
 

@@ -1,4 +1,4 @@
-package com.github.meshotron2.scriptPlugin;
+package com.github.meshotron2.scriptPlugin.shape;
 
 import java.util.ArrayList;
 import java.util.List;
