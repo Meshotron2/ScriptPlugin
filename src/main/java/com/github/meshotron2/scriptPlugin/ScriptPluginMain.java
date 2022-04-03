@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
+import com.github.meshotron2.scriptPlugin.shape.ShapeFactory;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -27,9 +28,14 @@ public class ScriptPluginMain {
                 // print LISP-style tree:
                 // System.out.println(tree.toStringTree(parser));
                 if (Objects.equals(args[0], "lm")) {
-                    ScriptPluginBaseVisitor<String> visitor0 = new LoadModulesVisitor(args[1]);
+                    final ScriptPluginBaseVisitor<String> visitor0 = new LoadModulesVisitor(args[1]);
                     final String result = visitor0.visit(tree);
                     System.out.println(result);
+                } else if (Objects.equals(args[0], "dwm")) {
+                    final ScriptPluginBaseVisitor<Object> visitor0 = new DWMVisitor(args[1], new ShapeFactory());
+                    visitor0.visit(tree);
+//                    final String result = visitor0.visit(tree);
+//                    System.out.println(result);
                 }
             }
         } catch (IOException /*| RecognitionException*/ e) {
