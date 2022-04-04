@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import com.github.meshotron2.scriptPlugin.shape.ShapeFactory;
+import com.github.meshotron2.scriptPlugin.shapeDeserializadon.JSONRoom;
+import com.google.gson.Gson;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -32,8 +34,12 @@ public class ScriptPluginMain {
                     final String result = visitor0.visit(tree);
                     System.out.println(result);
                 } else if (Objects.equals(args[0], "dwm")) {
-                    final ScriptPluginBaseVisitor<Object> visitor0 = new DWMVisitor(args[1], new ShapeFactory());
+                    final ShapeFactory shapeFactory = new ShapeFactory();
+                    final ScriptPluginBaseVisitor<Object> visitor0 = new DWMVisitor(args[1], shapeFactory);
                     visitor0.visit(tree);
+                    final String inputRoom = args[3];
+                    final JSONRoom room = new Gson().fromJson(inputRoom, JSONRoom.class);
+                    room.write(shapeFactory);
 //                    final String result = visitor0.visit(tree);
 //                    System.out.println(result);
                 }

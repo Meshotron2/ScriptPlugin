@@ -1,7 +1,5 @@
 package com.github.meshotron2.scriptPlugin.shape;
 
-import com.github.meshotron2.scriptPlugin.Visitor;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,17 +32,17 @@ public class ShapeClass {
         );
     }
 
-    public String getJsonData(List<Integer> values, char coefficient) {
-        final Map<String, Integer> variable_values = new HashMap<>();
-
-        final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < values.size(); i++)
-//            variable_values.put(attributes.get(i), values.get(i));
-            sb.append("\"").append(attributes.get(i)).append("\": ").append("\"").append(values.get(i)).append("\",\n");
-
-        sb.append("\"").append("coefficient").append("\": ").append("\"").append(coefficient).append("\"\n");
-        return "\"" + Visitor.getShapeName() + "\": {\n" + sb + "}";
-    }
+//    public String getJsonData(List<Integer> values, char coefficient) {
+//        final Map<String, Integer> variable_values = new HashMap<>();
+//
+//        final StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < values.size(); i++)
+////            variable_values.put(attributes.get(i), values.get(i));
+//            sb.append("\"").append(attributes.get(i)).append("\": ").append("\"").append(values.get(i)).append("\",\n");
+//
+//        sb.append("\"").append("coefficient").append("\": ").append("\"").append(coefficient).append("\"\n");
+//        return "\"" + Visitor.getShapeName() + "\": {\n" + sb + "}";
+//    }
 
     public String getName() {
         return name;

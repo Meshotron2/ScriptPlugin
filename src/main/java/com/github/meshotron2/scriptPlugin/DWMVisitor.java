@@ -1,16 +1,10 @@
 package com.github.meshotron2.scriptPlugin;
 
-import com.github.meshotron2.scriptPlugin.shape.Shape;
-import com.github.meshotron2.scriptPlugin.shape.ShapeClass;
 import com.github.meshotron2.scriptPlugin.shape.ShapeFactory;
 import com.github.meshotron2.scriptPlugin.shape.ShapeInitializer;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class DWMVisitor extends ScriptPluginBaseVisitor<Object> {
