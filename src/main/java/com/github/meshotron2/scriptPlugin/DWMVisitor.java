@@ -54,7 +54,7 @@ public class DWMVisitor extends ScriptPluginBaseVisitor<Object> {
             });
         };
 
-        return new Object[]{ctx.ID(0), init};
+        return new Object[]{ctx.ID(0).getText(), init};
     }
 
     @Override

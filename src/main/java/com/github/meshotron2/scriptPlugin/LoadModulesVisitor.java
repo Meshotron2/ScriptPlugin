@@ -39,6 +39,9 @@ public class LoadModulesVisitor extends ScriptPluginBaseVisitor<String> {
 
         sb.append("\"shapes\": {");
 
+        System.out.println("MY SHAPES ---");
+        System.out.println("---");
+
         for (ScriptPluginParser.InstantiationContext instantiationContext : ctx.instantiation()) {
             sb.append("\"").append(cnt.getAndIncrement()).append("\": {");
             sb.append(visit(instantiationContext));
@@ -78,6 +81,8 @@ public class LoadModulesVisitor extends ScriptPluginBaseVisitor<String> {
                 .mapToInt(value -> Integer.parseInt(value.getText()))
                 .toArray();
         final String nameToInstantiate = ctx.ID().getText();
+
+        sb.append("\"type\": \"").append(ctx.ID().getText().toLowerCase(Locale.ROOT)).append("\",");
 
         nameAttributesMap.forEach((name, attributes) -> {
             if (name.equals(nameToInstantiate))
