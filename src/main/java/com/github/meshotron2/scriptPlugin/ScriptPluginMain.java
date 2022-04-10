@@ -1,16 +1,18 @@
 package com.github.meshotron2.scriptPlugin;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Objects;
-
 import com.github.meshotron2.scriptPlugin.shape.ShapeFactory;
 import com.github.meshotron2.scriptPlugin.shapeDeserializadon.JSONRoom;
 import com.google.gson.Gson;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Objects;
 
 public class ScriptPluginMain {
     public static void main(String[] args) {
@@ -19,7 +21,7 @@ public class ScriptPluginMain {
 //        System.out.println(sb);
 //        System.exit(0);
 //        System.out.println("UPDATED " + Arrays.toString(args));
-        System.out.println("here");
+//        System.out.println("here");
 
         try {
             // create a CharStream that reads from standard input:
@@ -43,7 +45,6 @@ public class ScriptPluginMain {
                     final String result = visitor0.visit(tree);
                     System.out.println(result);
                 } else if (Objects.equals(args[0], "dwm")) {
-                    System.out.println("before");
                     final ShapeFactory shapeFactory = new ShapeFactory();
                     final ScriptPluginBaseVisitor<Object> visitor0 = new DWMVisitor(args[1], shapeFactory);
                     visitor0.visit(tree);
@@ -56,7 +57,7 @@ public class ScriptPluginMain {
 //                    System.out.println(result);
                 }
             }
-        } catch (IOException /*| RecognitionException*/ e) {
+        } catch (IOException | URISyntaxException /*| RecognitionException*/ e) {
             e.printStackTrace();
             System.exit(1);
         }

@@ -78,16 +78,20 @@ public class Room {
     }
 
     public void writeNode(char c, int x, int y, int z) throws IOException {
-//        System.out.println("Writing node");
+        System.out.println("Writing node");
 //        final int n = 4*4 + (x+1) * (y+1) * (z+1);
         final int n = 4*4 + (x*this.y*this.z) + (y*this.z) + z;
-//        System.out.printf("(%d, %d, %d) - %d%n", x, y, z, n);
+        System.out.printf("(%d, %d, %d) - %d%n", x, y, z, n);
 
 //        byte[] bytes = {(byte) (c >> 8), (byte) c};
         byte bytes = (byte) c;
 
 //        System.out.println(bytes.length);
 //        writer.write(bytes, n, 2);
+
+        // TODO: 4/9/22 Make a more graceful handling for Negative seek offset
+        if (n < 0)
+            return;
 
         randWriter = new RandomAccessFile(file, "rw");
         randWriter.seek(n);

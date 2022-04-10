@@ -4,7 +4,10 @@ import com.github.meshotron2.scriptPlugin.shape.ShapeFactory;
 import com.github.meshotron2.scriptPlugin.shape.ShapeInitializer;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class DWMVisitor extends ScriptPluginBaseVisitor<Object> {
@@ -46,11 +49,23 @@ public class DWMVisitor extends ScriptPluginBaseVisitor<Object> {
         final ShapeInitializer init = (coefficient, arguments) -> {
             ctx.expr().stream().map(exprContext -> (List<String>) visit(exprContext)).forEach(nameAndParams -> {
                 final int[] args = new int[nameAndParams.size() - 1];
-                for (int i = 0; i < nameAndParams.subList(1, nameAndParams.size()).size(); i++)
-                    args[i] = arguments[variables.indexOf(nameAndParams.get(i))];
 
-                shapeFactory.getInitializerFromClass(nameAndParams.get(0))
-                        .initialize(coefficient, args);
+                System.out.println("START ---");
+                System.out.println(nameAndParams);
+                System.out.println(variables);
+                System.out.println(Arrays.toString(arguments));
+                System.out.println("END   ---");
+                for (int i = 1; i < nameAndParams.size()/* - 1*/; i++) {
+                    args[i-1] = arguments[variables.indexOf(nameAndParams.get(i)) - 1];
+                }
+
+                try {
+                    System.out.println("Running " + nameAndParams.get(0) + "<" + coefficient + ">" + Arrays.toString(args));
+                    shapeFactory.getInitializerFromClass(nameAndParams.get(0).toLowerCase(Locale.ROOT))
+                            .initialize(coefficient, args);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             });
         };
 

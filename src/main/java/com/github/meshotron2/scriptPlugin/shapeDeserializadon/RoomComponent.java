@@ -9,7 +9,6 @@ public class RoomComponent {
     public RoomComponent(String type, Map<String, String> properties) {
         this.type = type;
         this.properties = properties;
-        System.out.println(type + " " + properties.toString());
     }
 
     public String getType() {

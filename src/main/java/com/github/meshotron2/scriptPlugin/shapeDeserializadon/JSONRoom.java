@@ -4,6 +4,7 @@ import com.github.meshotron2.scriptPlugin.Room;
 import com.github.meshotron2.scriptPlugin.shape.ShapeFactory;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -19,6 +20,8 @@ public class JSONRoom {
 
     public void write(ShapeFactory shapeFactory) throws IOException {
         final Room r = new Room(file, Integer.parseInt(xg), Integer.parseInt(yg), Integer.parseInt(zg), Integer.parseInt(f));
+        final Room room = new Room(file, Integer.parseInt(xg), Integer.parseInt(yg), Integer.parseInt(zg), Integer.parseInt(f));
+        shapeFactory.setRoom(room);
 
         r.startWrite();
 
@@ -31,7 +34,11 @@ public class JSONRoom {
                     args[cnt.getAndIncrement()] = Integer.parseInt(s2);
             });
 
-            shapeFactory.getInitializerFromClass(rc.getType()).initialize(coef, args);
+            try {
+                shapeFactory.getInitializerFromClass(rc.getType()).initialize(coef, args);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         System.out.println("Finished!");

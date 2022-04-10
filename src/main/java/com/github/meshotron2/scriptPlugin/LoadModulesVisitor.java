@@ -1,10 +1,9 @@
 package com.github.meshotron2.scriptPlugin;
 
-import com.github.meshotron2.scriptPlugin.shape.Shape;
-import com.github.meshotron2.scriptPlugin.shape.ShapeClass;
-import com.github.meshotron2.scriptPlugin.shape.ShapeFactory;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -12,12 +11,15 @@ import java.util.stream.Collectors;
 public class LoadModulesVisitor extends ScriptPluginBaseVisitor<String> {
 
     private final String fileName;
+    private final String pluginFile;
 
     private final AtomicInteger cnt = new AtomicInteger(0);
     private final Map<String, String[]> nameAttributesMap = new HashMap<>();
 
-    public LoadModulesVisitor(String fileName) {
+    public LoadModulesVisitor(String fileName) throws URISyntaxException {
         this.fileName = fileName;
+        this.pluginFile = new File(ScriptPluginParser.class.getProtectionDomain().getCodeSource().getLocation()
+                .toURI()).getPath();
     }
 
     @Override
@@ -35,12 +37,10 @@ public class LoadModulesVisitor extends ScriptPluginBaseVisitor<String> {
                 .append("\"yg\": \"").append(ctx.NUM(1)).append("\",")
                 .append("\"zg\": \"").append(ctx.NUM(2)).append("\",")
                 .append("\"f\": \"").append(ctx.NUM(3)).append("\",")
-                .append("\"file\": \"").append(fileName).append("\",");
+                .append("\"file\": \"").append(fileName).append("\",")
+                .append("\"plugin_file\": \"").append(pluginFile).append("\",");
 
         sb.append("\"shapes\": {");
-
-        System.out.println("MY SHAPES ---");
-        System.out.println("---");
 
         for (ScriptPluginParser.InstantiationContext instantiationContext : ctx.instantiation()) {
             sb.append("\"").append(cnt.getAndIncrement()).append("\": {");
